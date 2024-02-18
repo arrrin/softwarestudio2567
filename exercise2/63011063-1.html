@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <style type="text/css">
+      @media only screen and (max-width: 900px) {
+        body {
+          width: 100%;
+        }
+      }
+      @media only screen and (min-width: 900px) {
+        html {
+          display: flex;
+          margin: auto;
+        }
+
+        body {
+          margin: auto;
+          width: 75%;
+          height: 100%;
+          vertical-align: middle;
+        }
+      }
+      header > h1 {
+        color: blue;
+        text-align: center;
+        background-color: gold;
+      }
+      header.article {
+        text-align: center;
+        color: #e89de1;
+      }
+      .reporter {
+        color: steelblue;
+        margin: 0;
+      }
+      .reporter img {
+        float: right;
+        border: 3px solid steelblue;
+      }
+      time {
+        color: hotpink;
+        font-style: italic;
+      }
+      article {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 10px;
+        margin-top: 100px;
+      }
+      section.col2 {
+        width: 50%;
+      }
+      aside {
+        float: right;
+        width: 300px; /* Adjust this value as needed to control where the text breaks */
+        word-break: break-word;
+        font-size: 40px;
+        border-top: solid black 4px;
+        border-bottom: solid black 4px;
+      }
+      footer {
+        color: blue;
+        text-align: center;
+        background-color: gold;
+      }
+      progress {
+        color: blue;
+      }
+      .luckd {
+        margin-top: 40px;
+        width: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top"><h1>SW Studio Today</h1></header>
+    <header class="article"><h2>The record of the CSS class</h2></header>
+    <div class="reporter">
+      <img
+        src="https://previews.123rf.com/images/gmast3r/gmast3r1809/gmast3r180900199/109840480-brunette-businessman-avatar-man-face-profile-icon-concept-online-support-service-male-cartoon-charac.jpg"
+        alt="picture"
+        width="200"
+      />Reported by <br />Mr. Arin Salabsi<br />
+      (Auto)<br />
+      ID 63011063<br /><br /><time datetime="2020-02-14">Jan 28, 2024</time>
+    </div>
+    <article>
+      <section class="col1">
+        <h3>Introduction</h3>
+        <p>describe your background about CSS e.g.</p>
+        <ul>
+          <li>do you know CSS?</li>
+          <li>Have you ever been using CSS?</li>
+          <li>Have you ever worked with CSS before?</li>
+          <li>Have you any idea how CSS works?</li>
+          <li>What are you expecting from CSS?</li>
+          <li>etc.</li>
+        </ul>
+      </section>
+
+      <section class="col2">
+        <h3>The expectation</h3>
+        <p>Describe your expectations for today's class</p>
+        <p>You can list it like this:</p>
+        <ol>
+          <li>expect #1</li>
+          <li>expect #2</li>
+          <li>expect #3</li>
+        </ol>
+      </section>
+    </article>
+
+    <aside>
+      <p><em>your quote of today's class</em></p>
+    </aside>
+
+    <section class="prog">
+      <p>Progress of today's class <progress value="2" max="5"></progress></p>
+    </section>
+
+    <section class="luckd">
+      <p>register for lucky draw</p>
+      <form>
+        <fieldset>
+          <label>Name:</label><em>*</em>
+          <input
+            type="text"
+            id="name"
+            placeholder="John Smith"
+            autofocus
+            required
+          /><br />
+          <label>email:</label><em>*</em>
+          <input
+            type="email"
+            id="email"
+            placeholder="abc@def.com"
+            autofocus
+            required
+          /><br />
+          <label>Tel:</label><em>*</em>
+          <input
+            type="tel"
+            id="tel"
+            placeholder="0xx-xxxxxxx"
+            pattern="[0-9]{3}-[0-9]{7}"
+            autofocus
+            required
+          /><br />
+          <input type="submit" />
+        </fieldset>
+      </form>
+    </section>
+    <footer>ce.kmitl all rights reserved & copyright 2020</footer>
+  </body>
+</html>

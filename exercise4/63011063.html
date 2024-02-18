@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <div id="maincontainer"></div>
+    <script>
+      // Create header
+      var header = document.createElement("h2");
+      header.textContent = "Exercise 04: JavaScript&DOM";
+      var container = document.getElementById("maincontainer");
+      container.appendChild(header);
+
+      //timestamp
+      var timeContainer = document.createElement("div");
+      timeContainer.style.height = "40px";
+      container.appendChild(timeContainer);
+      var timeButton = document.createElement("button");
+      timeButton.setAttribute("id", "timeStart");
+      timeButton.setAttribute("toggled", "false");
+      timeButton.textContent = "Click me to display Date and Time";
+      timeButton.style.display = "hidden";
+      timeContainer.appendChild(timeButton);
+
+      var timeWorker;
+      timeButton.onclick = function () {
+        if (!timeWorker) {
+          timeButton.setAttribute("toggled", "true");
+          createTimeWorker();
+        } else {
+          timeButton.setAttribute("toggled", "false");
+          timeWorker.terminate();
+          timeWorker = null;
+
+          timeButton.style.position = "static";
+          timeButton.style.top = "";
+          timeButton.style.right = "";
+          timeButton.style.sticky = "";
+        }
+      };
+
+      function createTimeWorker() {
+        // var workerScript = `
+        //              var colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+        //              var backgroundColors = ["red", "orange", "yellow", "pink", "blue", "indigo", "steelblue"].reverse();
+        //              var colorIndex = 0;
+        //              function update() {
+        //                  var now = new Date();
+        //                  postMessage({
+        //                      time: now,
+        //                      color: colors[colorIndex],
+        //                      backgroundColor: backgroundColors[colorIndex]
+        //                  });
+        //                  colorIndex = (colorIndex + 1) % colors.length;
+        //                  setTimeout(update, 1000);
+        //              }
+        //              update();
+        //          `;
+
+        //var blob = new Blob([workerScript], { type: "application/javascript" });
+        //timeWorker = new Worker(URL.createObjectURL(blob));
+        timeWorker = new Worker("./63011063.js");
+        // listener
+        timeWorker.onmessage = function (e) {
+          updateTimeDisplay(e.data.time, e.data.color, e.data.backgroundColor);
+        };
+      }
+
+      function updateTimeDisplay(text, textColor, bgColor) {
+        timeButton.textContent = text;
+        timeButton.style.cssText = `
+                     font-size: 15px;
+                     border: 2px solid blue;
+                     padding: 2px 4px;
+                     color: ${textColor};
+                     position: fixed;
+                     top: 0px;
+                     right: 0px;
+                     background-color: ${bgColor};
+                 `;
+      }
+
+      //personal info
+      var infoContainer = document.createElement("div");
+      infoContainer.style.marginTop = "20px";
+      container.appendChild(infoContainer);
+
+      var info = document.createElement("a");
+      info.textContent = "Personal info";
+      info.style.color = "pink";
+      info.href = "javascript:void(0);";
+      info.addEventListener("mouseover", addHoverStyle);
+      info.addEventListener("mouseout", removeHoverStyle);
+      info.setAttribute("toggled", "false");
+      infoContainer.appendChild(info);
+      function addHoverStyle() {
+        this.style.color = "blue";
+        this.style.backgroundColor = "yellow";
+      }
+      function removeHoverStyle() {
+        this.style.color = "pink";
+        this.style.backgroundColor = "transparent";
+      }
+      const personalInfo = [
+        "Arin Salabsi, ID : 63011063",
+        "Subject: Software Studio",
+        "Semester: 2/2566",
+      ];
+      info.addEventListener("click", function () {
+        if (info.getAttribute("toggled") == "false") {
+          var list = document.createElement("ul");
+          list.setAttribute("id", "infoList");
+          personalInfo.forEach(function (item) {
+            var listItem = document.createElement("li");
+            listItem.textContent = item;
+            list.appendChild(listItem);
+            info.setAttribute("toggled", "true");
+          });
+          infoContainer.appendChild(list);
+        } else {
+          var infoList = document.getElementById("infoList");
+          infoList.remove();
+          info.setAttribute("toggled", "false");
+        }
+      });
+
+      // Create an <h1> snapshot
+      var snapshot = document.createElement("h1");
+      snapshot.textContent = "Snapshots";
+      container.appendChild(snapshot);
+
+      const imageNameAndLinks = {
+        Firework:
+          "https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?q=80&w=2973&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        Crest:
+          "https://images.unsplash.com/photo-1594384151968-e1616fa703ea?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        Action:
+          "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2959&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        Buffalo:
+          "https://images.unsplash.com/photo-1575414914265-ebc9aa2637f4?q=80&w=2912&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      };
+
+      const imageListContainer = document.createElement("div");
+      imageListContainer.style.display = "inline-block";
+      const imageContainer = document.createElement("div");
+      container.appendChild(imageListContainer);
+      container.appendChild(imageContainer);
+      var image = document.createElement("img");
+      image.style.maxWidth = "50%";
+      image.style.marginTop = "20px";
+      image.src =
+        "https://images.unsplash.com/photo-1707058665477-560297ffe913?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+      imageContainer.appendChild(image);
+
+      Object.keys(imageNameAndLinks).forEach((key) => {
+        let li = document.createElement("li");
+        let a = document.createElement("a");
+        a.innerHTML = key;
+        a.href = "";
+        li.id = key;
+        li.appendChild(a);
+        imageListContainer.appendChild(li);
+        li.addEventListener("click", (e) => {
+          e.preventDefault();
+          image.src = imageNameAndLinks[key];
+        });
+      });
+    </script>
+  </body>
+</html>
