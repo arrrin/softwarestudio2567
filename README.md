@@ -1,1 +1,1 @@
-I hate Javascript.
+# I hate Javascript.
